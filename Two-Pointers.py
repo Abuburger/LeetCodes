@@ -14,4 +14,25 @@ def maxArea(heights: list[int]) -> int:
         
     return maximum
 
-print(maxArea([2, 2, 2]))
+
+#Trapping rain water - Hard
+
+def trap(height: list[int]) -> int:
+    left = [0] * len(height)
+    right = [0] * len(height) 
+    lm = 0
+    rm = 0
+    res = 0
+    for i in range(len(height)): 
+        lm = max(lm, height[i])
+        left[i] = lm
+    for i in range(len(height) - 1, -1, -1):
+        rm = max(rm, height[i])
+        right[i] = rm
+    for i in range(len(height)): 
+        res += min(left[i], right[i]) - height[i]
+    return res
+        
+
+print(trap([0,2,0,3,1,0,1,3,2,1]))
+

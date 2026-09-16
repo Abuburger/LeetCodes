@@ -32,7 +32,4 @@ def trap(height: list[int]) -> int:
     for i in range(len(height)): 
         res += min(left[i], right[i]) - height[i]
     return res
-        
-
-print(trap([0,2,0,3,1,0,1,3,2,1]))
 

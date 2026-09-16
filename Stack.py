@@ -1,4 +1,5 @@
 import operator #For Revese Polish Notation 
+from collections import defaultdict
 
 #Valid Parentheses
 def isValid(s: str) -> bool:
@@ -44,7 +45,7 @@ class MinStack:
         return self.minstack[-1]
 
 
-t1 = ["2","1","+","3","*"]
+
 # Evaluate Reverse Polish Notation
 def EvalRPN(tokens: list[str]) -> int:
     operators = {
@@ -62,4 +63,24 @@ def EvalRPN(tokens: list[str]) -> int:
             operand2 = int(stack.pop())
             stack.append(operators[tokens[i]](operand2, operand1))
     return int(stack.pop())
-EvalRPN(t1)     
+
+#Daily Temperature
+temps = [30,38,30,36,35,40,28]
+def dailyTemperature(temperatures: list[int]) -> list[int]:
+    res = [0] * len(temperatures)
+    stack = []
+    for i in range(len(temperatures) -1, -1, -1):
+        while stack and temperatures[stack[-1]] <= temperatures[i]:
+            stack.pop()
+        if len(stack) == 0:
+                stack.append(i)
+        else:
+            res[i] = stack[-1] - i
+            stack.append(i)
+
+    return res
+
+        
+
+print(dailyTemperature(temps)) 
+        

@@ -80,7 +80,29 @@ def dailyTemperature(temperatures: list[int]) -> list[int]:
 
     return res
 
-        
+#Car Fleet - Medium
+target = 10
+position = [1, 4]
+speed = [3, 2]
+def carFleet(target: int, positions: list[int], speeds: list[int]): 
+    hashmap = {}
+    stack = []
+    for i in range(len(positions)):
+        hashmap[positions[i]] = speeds[i]
+    positions = sorted(positions) 
+    positions.reverse() ##[10, 8, 5, 3, 0]
+    for pos in positions:
+        hours = (target - pos) / hashmap[pos]
+        if not stack:
+            stack.append(hours)
+        elif hours > stack[-1]:
+            stack.append(hours)
+        else:
+            continue 
+    return len(stack)
 
-print(dailyTemperature(temps)) 
+
+print(carFleet(target, position, speed))
+
+
         

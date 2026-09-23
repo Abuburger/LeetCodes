@@ -80,7 +80,25 @@ def dailyTemperature(temperatures: list[int]) -> list[int]:
 
     return res
 
-        
+lrec = [1,3,7]
+#Largest Rectangle In Histogram
+def largestRectangleArea(heights: list[int]) -> int: 
+    maxhist = 0 
+    stack = []
+    for i, n in enumerate(heights):
+        start = i 
 
-print(dailyTemperature(temps)) 
-        
+        while stack and n < stack[-1][1]:
+            index, height = stack.pop() 
+            area = height * (i - index) 
+            maxhist = max(maxhist, area)
+            start = index
+        stack.append((start, n))
+
+    for index, height in stack: 
+        farea = height * (len(heights) - index)
+        maxhist = max(maxhist, farea) 
+    return maxhist
+
+print(largestRectangleArea(lrec))
+

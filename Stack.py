@@ -80,25 +80,29 @@ def dailyTemperature(temperatures: list[int]) -> list[int]:
 
     return res
 
-lrec = [1,3,7]
-#Largest Rectangle In Histogram
-def largestRectangleArea(heights: list[int]) -> int: 
-    maxhist = 0 
+#Car Fleet - Medium
+target = 10
+position = [1, 4]
+speed = [3, 2]
+def carFleet(target: int, positions: list[int], speeds: list[int]): 
+    hashmap = {}
     stack = []
-    for i, n in enumerate(heights):
-        start = i 
+    for i in range(len(positions)):
+        hashmap[positions[i]] = speeds[i]
+    positions = sorted(positions) 
+    positions.reverse() ##[10, 8, 5, 3, 0]
+    for pos in positions:
+        hours = (target - pos) / hashmap[pos]
+        if not stack:
+            stack.append(hours)
+        elif hours > stack[-1]:
+            stack.append(hours)
+        else:
+            continue 
+    return len(stack)
 
-        while stack and n < stack[-1][1]:
-            index, height = stack.pop() 
-            area = height * (i - index) 
-            maxhist = max(maxhist, area)
-            start = index
-        stack.append((start, n))
 
-    for index, height in stack: 
-        farea = height * (len(heights) - index)
-        maxhist = max(maxhist, farea) 
-    return maxhist
+print(carFleet(target, position, speed))
 
-print(largestRectangleArea(lrec))
 
+        

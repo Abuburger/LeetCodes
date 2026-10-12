@@ -12,3 +12,18 @@ def search(nums: list[int], target: int) -> int:
             return mid
     return -1 
 
+
+
+
+#Search a 2D Matrix 
+def searchMatrix(matrix: list[list[int]], target: int) -> bool:
+    s_list = []
+    for lists in matrix:
+        if lists[-1] < target: 
+            continue 
+        s_list = lists
+        break
+    if search(s_list, target) == -1:
+        return False
+    return True
+
